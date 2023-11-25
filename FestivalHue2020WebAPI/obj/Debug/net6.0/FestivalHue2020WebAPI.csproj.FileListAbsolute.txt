@@ -68,3 +68,10 @@ C:\VSCode\DotNet\FestivalHue2020WebAPI\FestivalHue2020WebAPI\obj\Debug\net6.0\Fe
 C:\VSCode\DotNet\FestivalHue2020WebAPI\FestivalHue2020WebAPI\obj\Debug\net6.0\ref\FestivalHue2020WebAPI.dll
 C:\VSCode\DotNet\FestivalHue2020WebAPI\FestivalHue2020WebAPI\bin\Debug\net6.0\AutoMapper.dll
 C:\VSCode\DotNet\FestivalHue2020WebAPI\FestivalHue2020WebAPI\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\VSCode\DotNet\FestivalHue2020WebAPI\FestivalHue2020WebAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\VSCode\DotNet\FestivalHue2020WebAPI\FestivalHue2020WebAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\VSCode\DotNet\FestivalHue2020WebAPI\FestivalHue2020WebAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\VSCode\DotNet\FestivalHue2020WebAPI\FestivalHue2020WebAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\VSCode\DotNet\FestivalHue2020WebAPI\FestivalHue2020WebAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\VSCode\DotNet\FestivalHue2020WebAPI\FestivalHue2020WebAPI\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
+C:\VSCode\DotNet\FestivalHue2020WebAPI\FestivalHue2020WebAPI\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
