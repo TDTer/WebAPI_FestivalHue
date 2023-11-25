@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FestivalHue2020WebAPI.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class FestivalHueV11 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -58,7 +58,7 @@ namespace FestivalHue2020WebAPI.Migrations
                     ChuongTrinhName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ChuongTrinhContent = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TypeInoff = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Price = table.Column<float>(type: "real", nullable: false),
                     TypeProgram = table.Column<int>(type: "int", nullable: false),
                     Arrange = table.Column<int>(type: "int", nullable: false),
                     Md5 = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -101,6 +101,30 @@ namespace FestivalHue2020WebAPI.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Ve",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ChuongTrinhId = table.Column<int>(type: "int", nullable: false),
+                    Gia = table.Column<float>(type: "real", nullable: false),
+                    NgayDat = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgayBan = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    QRCode = table.Column<int>(type: "int", nullable: false),
+                    HopLe = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ve", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Ve_ChuongTrinh_ChuongTrinhId",
+                        column: x => x.ChuongTrinhId,
+                        principalTable: "ChuongTrinh",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_ChuongTrinh_LichDienId",
                 table: "ChuongTrinh",
@@ -109,6 +133,11 @@ namespace FestivalHue2020WebAPI.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_chuongTrinhDetail_ChuongTrinhId",
                 table: "chuongTrinhDetail",
+                column: "ChuongTrinhId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ve_ChuongTrinhId",
+                table: "Ve",
                 column: "ChuongTrinhId");
         }
 
@@ -122,6 +151,9 @@ namespace FestivalHue2020WebAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "TinTuc");
+
+            migrationBuilder.DropTable(
+                name: "Ve");
 
             migrationBuilder.DropTable(
                 name: "ChuongTrinh");

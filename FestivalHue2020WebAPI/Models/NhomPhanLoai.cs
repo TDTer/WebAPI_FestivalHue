@@ -1,6 +1,6 @@
-﻿namespace FestivalHue2020WebAPI.DTO
+﻿namespace FestivalHue2020WebAPI.Models
 {
-    public class DiaDiemDTO
+    public class NhomPhanLoai
     {
         public int Id { get; set; }
         public string Name { get; set; }

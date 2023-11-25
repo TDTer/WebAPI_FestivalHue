@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FestivalHue2020WebAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231121055939_NewMirgation")]
-    partial class NewMirgation
+    [Migration("20231124171451_FestivalHueV1.1")]
+    partial class FestivalHueV11
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -165,6 +165,39 @@ namespace FestivalHue2020WebAPI.Migrations
                     b.ToTable("TinTuc");
                 });
 
+            modelBuilder.Entity("FestivalHue2020WebAPI.Models.Ve", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ChuongTrinhId")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Gia")
+                        .HasColumnType("real");
+
+                    b.Property<bool>("HopLe")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("NgayBan")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("NgayDat")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("QRCode")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChuongTrinhId");
+
+                    b.ToTable("Ve");
+                });
+
             modelBuilder.Entity("FestivalHue2020WebAPI.Models.ChuongTrinh", b =>
                 {
                     b.HasOne("FestivalHue2020WebAPI.Models.LichDien", null)
@@ -177,6 +210,17 @@ namespace FestivalHue2020WebAPI.Migrations
                     b.HasOne("FestivalHue2020WebAPI.Models.ChuongTrinh", null)
                         .WithMany("DetailList")
                         .HasForeignKey("ChuongTrinhId");
+                });
+
+            modelBuilder.Entity("FestivalHue2020WebAPI.Models.Ve", b =>
+                {
+                    b.HasOne("FestivalHue2020WebAPI.Models.ChuongTrinh", "ChuongTrinh")
+                        .WithMany()
+                        .HasForeignKey("ChuongTrinhId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ChuongTrinh");
                 });
 
             modelBuilder.Entity("FestivalHue2020WebAPI.Models.ChuongTrinh", b =>

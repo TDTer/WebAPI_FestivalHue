@@ -12,6 +12,10 @@ builder.Services.AddControllers();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<IChuongTrinhRepository, ChuongTrinhRepository>();
+builder.Services.AddScoped<IDiaDiemRepository, DiaDiemRepository>();
+builder.Services.AddScoped<ILichDienRepository, LichDienRepository>();
+builder.Services.AddScoped<ITinTucRepository, TinTucRepository>();
+builder.Services.AddScoped<IVeReponsitory, VeRepository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

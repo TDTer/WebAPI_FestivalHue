@@ -16,12 +16,14 @@ namespace FestivalHue2020WebAPI.Repositories
 
         public async Task<List<ChuongTrinh>> GetAllChuongTrinhsAsync()
         {
-            return await _dbContext.ChuongTrinh.ToListAsync();
+            return await _dbContext.ChuongTrinh.Include(ct => ct.DetailList).ToListAsync();
         }
 
         public async Task<ChuongTrinh> GetChuongTrinhByIdAsync(int id)
         {
-            return await _dbContext.ChuongTrinh.FindAsync(id);
+            return await _dbContext.ChuongTrinh
+            .Include(ct => ct.DetailList)
+            .FirstOrDefaultAsync(ct => ct.Id == id);
         }
 
         public async Task AddChuongTrinhAsync(ChuongTrinh chuongTrinh)

@@ -1,4 +1,6 @@
-﻿using FestivalHue2020WebAPI.Interfaces;
+﻿using AutoMapper;
+using FestivalHue2020WebAPI.DTO;
+using FestivalHue2020WebAPI.Interfaces;
 using FestivalHue2020WebAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,25 +11,33 @@ namespace FestivalHue2020WebAPI.Controllers
     public class ChuongTrinhController : ControllerBase
     {
         private readonly IChuongTrinhRepository _chuongTrinhRepository;
+        private readonly IMapper _mapper;
 
-        public ChuongTrinhController(IChuongTrinhRepository chuongTrinhRepository)
+        public ChuongTrinhController(IChuongTrinhRepository chuongTrinhRepository,
+            IMapper mapper)
         {
             _chuongTrinhRepository = chuongTrinhRepository ?? throw new ArgumentNullException(nameof(chuongTrinhRepository));
+            _mapper = mapper;
         }
 
         // GET api/ChuongTrinh
         [HttpGet]
         public async Task<IActionResult> GetAllChuongTrinhs()
         {
-            var chuongTrinhs = await _chuongTrinhRepository.GetAllChuongTrinhsAsync();
-            return Ok(chuongTrinhs);
+
+            var chuongTrinh = _mapper.Map<List<ChuongTrinhDTO>>(await _chuongTrinhRepository.GetAllChuongTrinhsAsync());
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(chuongTrinh);
         }
 
         // GET api/ChuongTrinh/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetChuongTrinhById(int id)
         {
-            var chuongTrinh = await _chuongTrinhRepository.GetChuongTrinhByIdAsync(id);
+            var chuongTrinh = _mapper.Map<ChuongTrinhDTO>(await _chuongTrinhRepository.GetChuongTrinhByIdAsync(id));
 
             if (chuongTrinh == null)
                 return NotFound();
@@ -43,8 +53,9 @@ namespace FestivalHue2020WebAPI.Controllers
                 return BadRequest();
 
             await _chuongTrinhRepository.AddChuongTrinhAsync(chuongTrinh);
+            var chuongtrinhMap = _mapper.Map<ChuongTrinh>(chuongTrinh);
 
-            return CreatedAtAction(nameof(GetChuongTrinhById), new { id = chuongTrinh.Id }, chuongTrinh);
+            return CreatedAtAction(nameof(GetChuongTrinhById), new { id = chuongtrinhMap.Id }, chuongtrinhMap);
         }
 
         // PUT api/ChuongTrinh/5
@@ -59,11 +70,10 @@ namespace FestivalHue2020WebAPI.Controllers
             if (existingChuongTrinh == null)
                 return NotFound();
 
-            existingChuongTrinh.ChuongTrinhName = chuongTrinh.ChuongTrinhName;
-            existingChuongTrinh.ChuongTrinhContent = chuongTrinh.ChuongTrinhContent;
-            // Cập nhật các thuộc tính khác theo cần thiết.
+            existingChuongTrinh = chuongTrinh;
+            var chuongtrinhMap = _mapper.Map<ChuongTrinh>(existingChuongTrinh);
 
-            await _chuongTrinhRepository.UpdateChuongTrinhAsync(existingChuongTrinh);
+            await _chuongTrinhRepository.UpdateChuongTrinhAsync(chuongtrinhMap);
 
             return NoContent();
         }

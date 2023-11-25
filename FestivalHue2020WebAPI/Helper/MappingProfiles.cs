@@ -8,7 +8,11 @@ namespace FestivalHue2020WebAPI.Helper
     {
         public MappingProfiles()
         {
-            CreateMap<ChuongTrinh, ChuongTrinhDTO>();
+            CreateMap<ChuongTrinh, ChuongTrinhDTO>().ReverseMap();
+            CreateMap<DiaDiem, DiaDiemDTO>().ReverseMap();
+            CreateMap<LichDien, LichDienDTO>().ReverseMap();
+            CreateMap<TinTuc, TinTucDTO>().ReverseMap();
+            CreateMap<Ve, VeDTO>().ReverseMap();
         }
     }
 }

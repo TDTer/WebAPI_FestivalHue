@@ -15,5 +15,6 @@ namespace FestivalHue2020WebAPI.Models
         public string Md5 { get; set; }
         [NotMapped]
         public List<string> PathImageList { get; set; }
+        //public LichDien LichDienId { get; set; }
     }
 }
